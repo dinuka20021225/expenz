@@ -1,3 +1,4 @@
+import 'package:expense/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,18 +14,7 @@ class MyApp extends StatelessWidget {
       title: "Expenze",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: "Inter"),
-      home: Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: Text(
-              "Hello Mother Fuckers!",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
-      ),
+      home: OnboardingScreen(),
     );
   }
 }
