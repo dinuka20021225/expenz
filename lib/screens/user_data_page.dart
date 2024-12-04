@@ -1,3 +1,5 @@
+import 'package:expense/screens/main_screen.dart';
+import 'package:expense/services/user_services.dart';
 import 'package:expense/utils/colors.dart';
 import 'package:expense/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -252,7 +254,7 @@ class _UserDataPageState extends State<UserDataPage> {
 
                     //----- submit button -----//
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (_formKey.currentState!.validate()) {
                           String userName = _userNameController.text;
                           String email = _emailController.text;
@@ -260,7 +262,25 @@ class _UserDataPageState extends State<UserDataPage> {
                           String confirmPassword =
                               _confirmPasswordController.text;
 
-                          //print("$userName, $email, $password, $confirmPassword");
+                          //save the usename emaiil in the device storage
+                          await UserServices.storeUserDetails(
+                            userName: userName,
+                            email: email,
+                            password: password,
+                            confirmPassword: confirmPassword,
+                            context: context,
+                          );
+                          // navigation to the main screen
+                          if (context.mounted) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const MainScreen();
+                                },
+                              ),
+                            );
+                          }
                         }
                       },
                       child: const CustomButton(
